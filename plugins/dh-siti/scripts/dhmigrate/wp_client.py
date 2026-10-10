@@ -24,6 +24,21 @@ class Credentials:
     password: str
 
 
+CONFIG_DIR = Path("~/.config/dh-unica")  # standard DH: ~/.config/dh-unica/<servizio>.env
+LEGACY_DIR = Path("~/.config/dh-wp")      # percorso delle prime versioni (ancora letto)
+
+
+def default_credentials_path(ambito: str) -> Path:
+    return (CONFIG_DIR / f"wp-{ambito}.env").expanduser()
+
+
+def _legacy_path(path: Path) -> Path | None:
+    """~/.config/dh-unica/wp-<ambito>.env -> ~/.config/dh-wp/<ambito>.env"""
+    if path.parent == CONFIG_DIR.expanduser() and path.name.startswith("wp-"):
+        return (LEGACY_DIR / path.name.removeprefix("wp-")).expanduser()
+    return None
+
+
 def load_credentials(path: Path) -> Credentials:
     """Credenziali per la destinazione.
 
@@ -33,6 +48,10 @@ def load_credentials(path: Path) -> Credentials:
     env_user, env_password = os.environ.get("DHM_WP_USER"), os.environ.get("DHM_WP_APP_PASSWORD")
     if env_user and env_password:
         return Credentials(env_user, env_password)
+    legacy = _legacy_path(path)
+    if not path.exists() and legacy is not None and legacy.exists():
+        log.warning("credenziali lette dal vecchio percorso %s: spostale in %s", legacy, path)
+        path = legacy
     if not path.exists():
         raise WPError(f"file credenziali assente: {path}. Crealo con: python -m dhmigrate login --url <sito>")
     if path.stat().st_mode & 0o077:

@@ -44,7 +44,7 @@ Lo strumento è il pacchetto Python `dhmigrate`, incluso nel plugin in `${CLAUDE
    motivato, ma non decidere al posto dell'utente.
 5. **Bozza → verifica → pubblicazione.** La pubblicazione è un comando separato (`publish --yes`) e su
    un sito di produzione va confermata dall'utente, salvo autorizzazione esplicita già data.
-6. **Credenziali fuori dal repo**: `~/.config/dh-wp/<ambito>.env` con permessi 600
+6. **Credenziali fuori dal repo**: `~/.config/dh-unica/wp-<ambito>.env` con permessi 600
    (`WP_USER`, `WP_APP_PASSWORD`). Mai in chiaro in documenti, commit o messaggi.
 7. **Git: un branch per task** (`docs/…`, `feat/…`, `fix/…`, `chore/run-<progetto>`), commit
    convenzionali e merge `--no-ff` (o PR con `gh` se c'è un remote). Mai commit diretti su `main`.
@@ -70,7 +70,7 @@ all'inizio di ogni comando che lo usa.
    ! env PYTHONPATH=${CLAUDE_PLUGIN_ROOT}/scripts ${CLAUDE_PLUGIN_DATA}/venv/bin/python -m dhmigrate login --url https://<ambito>.dh.unica.it
    ```
    Il comando chiede utente e password (nascosta), li verifica con l'API e li scrive in
-   `~/.config/dh-wp/<ambito>.env` con permessi 600. Avvisa se l'utente non può modificare i menu.
+   `~/.config/dh-unica/wp-<ambito>.env` con permessi 600. Avvisa se l'utente non può modificare i menu.
 3. Su server o CI si usano le variabili d'ambiente `DHM_WP_USER` e `DHM_WP_APP_PASSWORD`, che hanno
    la precedenza sul file.
 4. A migrazione chiusa, suggerisci di **revocare** la password dal profilo WordPress.
@@ -123,7 +123,7 @@ Usa una cartella di lavoro di progetto: un repo git con `docs/`, `config/`, `run
 
 ```bash
 $DHM survey --source https://<minisito> --slug <progetto> --ambito <ambito> \
-            --credentials ~/.config/dh-wp/<ambito>.env --workdir work
+            --workdir work
 ```
 
 Produce due file:

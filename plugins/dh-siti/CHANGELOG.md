@@ -4,6 +4,13 @@ Formato: [Keep a Changelog](https://keepachangelog.com/it/1.1.0/), versioni [Sem
 Ogni modifica pubblicata incrementa `version` in `.claude-plugin/plugin.json`: senza, i collaboratori
 non ricevono l'aggiornamento.
 
+## [1.0.1] - 2026-10-10
+
+### Modificato
+- Credenziali nel percorso standard DH `~/.config/dh-unica/wp-<ambito>.env` (creato da
+  `dhmigrate login`); il vecchio `~/.config/dh-wp/<ambito>.env` viene ancora letto, con un avviso.
+- `survey` trova da solo il file credenziali dell'ambito: `--credentials` non è più necessario.
+
 ## [1.0.0] - 2026-10-10
 
 ### Aggiunto
