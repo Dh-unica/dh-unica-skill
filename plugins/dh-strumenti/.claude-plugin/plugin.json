@@ -8,5 +8,10 @@
   },
   "homepage": "https://github.com/Dh-unica/dh-unica-skill/tree/main/plugins/dh-strumenti",
   "repository": "https://github.com/Dh-unica/dh-unica-skill",
-  "keywords": ["skill", "standard", "dh-unica"]
+  "license": "MIT",
+  "keywords": [
+    "skill",
+    "standard",
+    "dh-unica"
+  ]
 }

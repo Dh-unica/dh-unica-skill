@@ -8,6 +8,7 @@
   },
   "homepage": "https://github.com/Dh-unica/dh-unica-skill/tree/main/plugins/dh-siti",
   "repository": "https://github.com/Dh-unica/dh-unica-skill",
+  "license": "MIT",
   "keywords": [
     "wordpress",
     "migrazione",

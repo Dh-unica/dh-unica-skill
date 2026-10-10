@@ -142,7 +142,13 @@ Poi una **prova reale**:
 Le skill di livello *produzione* devono avere test sugli script e, quando possibile, un collaudo su un
 sito o servizio di prova.
 
-## 9. Codice sviluppato altrove
+## 9. Licenza e revisione
+
+- Tutto il marketplace è rilasciato con licenza **MIT** (file `LICENSE`); `plugin.json` riporta
+  `"license": "MIT"`. Non includere materiali con licenze incompatibili (font, loghi di terzi, dataset).
+- Ogni pull request richiede l'approvazione dei revisori indicati in `.github/CODEOWNERS`.
+
+## 10. Codice sviluppato altrove
 
 Se una skill porta con sé uno strumento che ha un suo repository (con i test), come `dhmigrate`, lo
 sviluppo resta lì. Nel plugin si copia solo il codice necessario, con uno script di sincronizzazione
