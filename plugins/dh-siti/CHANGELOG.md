@@ -4,6 +4,12 @@ Formato: [Keep a Changelog](https://keepachangelog.com/it/1.1.0/), versioni [Sem
 Ogni modifica pubblicata incrementa `version` in `.claude-plugin/plugin.json`: senza, i collaboratori
 non ricevono l'aggiornamento.
 
+## [1.0.2] - 2026-10-10
+
+### Corretto
+- `scripts/setup.sh`: il percorso del virtualenv veniva alterato (`/venv}`) per un'espansione di shell
+  errata nel messaggio d'uso.
+
 ## [1.0.1] - 2026-10-10
 
 ### Modificato
