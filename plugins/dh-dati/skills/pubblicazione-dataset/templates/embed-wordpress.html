@@ -1,0 +1,26 @@
+<!--
+  Da incollare in un blocco "HTML personalizzato" di WordPress.
+  Sostituisci URL_APP con l'indirizzo GitHub Pages dell'app (es. https://utente.github.io/progetto/)
+  e TITOLO con il titolo del progetto.
+  L'app deve inviare: parent.postMessage({type:'app:height', height: document.documentElement.scrollHeight}, '*')
+  Se WordPress rimuove lo <script>, lascia solo l'iframe con un'altezza fissa (es. 1200px).
+-->
+<iframe
+  id="app-progetto"
+  title="TITOLO"
+  src="URL_APP"
+  loading="lazy"
+  style="width:100%;min-height:900px;border:0;display:block"
+  allow="fullscreen"
+  allowfullscreen></iframe>
+<p style="font-size:.9em"><a href="URL_APP" target="_blank" rel="noopener">Apri l'applicazione a schermo intero</a></p>
+<script>
+(function () {
+  var frame = document.getElementById('app-progetto');
+  var origin = new URL(frame.src).origin;
+  window.addEventListener('message', function (e) {
+    if (e.origin !== origin || !e.data || e.data.type !== 'app:height') return;
+    frame.style.height = Math.max(900, Number(e.data.height) || 900) + 'px';
+  });
+})();
+</script>
