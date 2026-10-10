@@ -1,0 +1,12 @@
+{
+  "name": "dh-strumenti",
+  "version": "1.0.0",
+  "description": "Strumenti per chi crea skill al DH UNICA: creazione guidata di nuove skill secondo lo standard del marketplace dh-unica-skill, con modelli e controlli automatici.",
+  "author": {
+    "name": "Centro DH UNICA",
+    "url": "https://dh.unica.it"
+  },
+  "homepage": "https://github.com/Dh-unica/dh-unica-skill/tree/main/plugins/dh-strumenti",
+  "repository": "https://github.com/Dh-unica/dh-unica-skill",
+  "keywords": ["skill", "standard", "dh-unica"]
+}

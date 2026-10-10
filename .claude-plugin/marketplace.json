@@ -1,0 +1,35 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "dh-unica-skill",
+  "owner": {
+    "name": "Centro DH UNICA - Università degli Studi di Cagliari",
+    "url": "https://dh.unica.it"
+  },
+  "metadata": {
+    "description": "Skill Claude Code del Centro interdipartimentale per l'Umanistica Digitale (DH UNICA) dell'Università di Cagliari."
+  },
+  "plugins": [
+    {
+      "name": "dh-siti",
+      "source": "./plugins/dh-siti",
+      "description": "Siti web del DH: ricognizione e migrazione di minisiti di progetto nei portali {ambito}.dh.unica.it.",
+      "category": "siti-web",
+      "tags": [
+        "wordpress",
+        "migrazione",
+        "dh-unica"
+      ]
+    },
+    {
+      "name": "dh-strumenti",
+      "source": "./plugins/dh-strumenti",
+      "description": "Strumenti per chi crea skill al DH: creazione guidata di nuove skill secondo lo standard del marketplace, con modelli e controlli automatici.",
+      "category": "sviluppo",
+      "tags": [
+        "skill",
+        "standard",
+        "dh-unica"
+      ]
+    }
+  ]
+}

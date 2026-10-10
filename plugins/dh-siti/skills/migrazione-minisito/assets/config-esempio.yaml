@@ -1,0 +1,62 @@
+# Migrazione laricchezzadellachiesa.com -> storia.dh.unica.it/laricchezzadellachiesa
+# Vedi docs/piano-migrazione-laricchezzadellachiesa.md
+
+project:
+  slug: laricchezzadellachiesa
+  title: "La ricchezza della Chiesa e dei Luoghi pii in Italia"
+  ambito: storia
+
+source:
+  url: https://laricchezzadellachiesa.com
+  type: wordpress            # wordpress | static
+  elementor_default_direction: row   # direzione dei container Elementor senza CSS esplicito
+
+target:
+  url: https://storia.dh.unica.it
+  credentials: ~/.config/dh-wp/storia.env   # WP_USER, WP_APP_PASSWORD (mai nel repo)
+  template: page-fullwidth.php
+
+# Albero di destinazione. parent = source_slug del genitore (assente = radice di progetto).
+# menu_label: voce di sottomenu del progetto nel menu globale (ordine = ordine qui sotto).
+# La radice è la voce del progetto stessa (menu.label): il suo menu_label viene ignorato.
+pages:
+  - {source_slug: home, target_slug: laricchezzadellachiesa, title: "La ricchezza della Chiesa e dei Luoghi pii in Italia", menu_label: Home}
+  - {source_slug: about, target_slug: progetto, parent: home, title: "Il Progetto", menu_label: "Il Progetto"}
+  - {source_slug: stato-dellarte, target_slug: stato-dellarte, parent: about}
+  - {source_slug: descrizione-del-progetto, target_slug: descrizione-del-progetto, parent: about}
+  - {source_slug: sviluppo-del-progetto, target_slug: sviluppo-del-progetto, parent: about}
+  - {source_slug: state-of-art, target_slug: state-of-art, parent: about}
+  - {source_slug: project-description, target_slug: project-description, parent: about}
+  - {source_slug: project-development, target_slug: project-development, parent: about}
+  - {source_slug: equipe, target_slug: equipe, parent: home, menu_label: Equipe, image_width: 180}
+  - {source_slug: eventi, target_slug: eventi, parent: home, menu_label: Eventi}
+  - {source_slug: pubblicazioni, target_slug: pubblicazioni, parent: home, menu_label: Pubblicazioni}
+  - {source_slug: contatti, target_slug: contatti, parent: home, menu_label: Contatti}
+
+# Posizione nel menu globale del portale (confermata dall'utente il 10/10/2026):
+# Menu Principale > Progetti > La ricchezza della Chiesa > voci con menu_label
+menu:
+  location: menu-main
+  parent: Progetti
+  label: La ricchezza della Chiesa
+
+# Barra di sezione in testa a ogni pagina del progetto: percorso «Progetti › <progetto>» e menu del
+# progetto con la voce corrente evidenziata (pattern sincronizzato + menu wp_navigation).
+section_nav:
+  breadcrumb:
+    - {label: Progetti, url: "https://storia.dh.unica.it/category/progetti/"}
+
+# Footer del minisito sorgente -> blocco "Partner e finanziatori" nella pagina radice
+partners:
+  - name: Università degli Studi di Cagliari
+    image: https://laricchezzadellachiesa.com/wp-content/uploads/2024/12/70004-removebg-preview.png
+    link: https://www.unica.it/it
+  - name: Dipartimento di Lettere, Lingue e Beni culturali
+    image: https://laricchezzadellachiesa.com/wp-content/uploads/2024/12/doc2-removebg-preview.png
+    link: https://web.unica.it/unica/it/dip_letterelebc.page
+  - name: Fondazione di Sardegna
+    image: https://laricchezzadellachiesa.com/wp-content/uploads/2024/12/images__3_-removebg-preview.png
+    link: https://www.fondazionedisardegna.it/
+
+notes:
+  form_replacement: "Per informazioni sul progetto scrivere al Principal Investigator, prof. Sergio Tognetti, all'indirizzo indicato sopra."
