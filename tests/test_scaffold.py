@@ -6,7 +6,7 @@ from .conftest import check_skills, scaffold
 
 
 def run(market, **kw):
-    args = {"plugin": "dh-dati", "skill": "pubblicazione-dataset", "skill_descrizione": "Pubblica un dataset. Bene.",
+    args = {"plugin": "dh-prova", "skill": "esempio-prova", "skill_descrizione": "Pubblica un dataset. Bene.",
             "livello": "bozze", "plugin_descrizione": "Dati di ricerca del DH."} | kw
     argv = ["--root", str(market)]
     for key, value in args.items():
@@ -16,12 +16,12 @@ def run(market, **kw):
 
 def test_nuovo_plugin_e_skill(market):
     assert run(market) == 0
-    plugin = market / "plugins/dh-dati"
-    assert json.loads((plugin / ".claude-plugin/plugin.json").read_text())["name"] == "dh-dati"
-    assert (plugin / "skills/pubblicazione-dataset/SKILL.md").exists()
+    plugin = market / "plugins/dh-prova"
+    assert json.loads((plugin / ".claude-plugin/plugin.json").read_text())["name"] == "dh-prova"
+    assert (plugin / "skills/esempio-prova/SKILL.md").exists()
     names = [p["name"] for p in json.loads((market / ".claude-plugin/marketplace.json").read_text())["plugins"]]
-    assert names == sorted(names) and "dh-dati" in names
-    assert "`/dh-dati:pubblicazione-dataset`" in (market / "README.md").read_text()
+    assert names == sorted(names) and "dh-prova" in names
+    assert "`/dh-prova:esempio-prova`" in (market / "README.md").read_text()
     report = check_skills.check_marketplace(market)
     assert report.errors == [], report.errors          # struttura già conforme
     assert any("TODO" in w for w in report.warnings)   # ma da completare
