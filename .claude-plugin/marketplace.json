@@ -10,6 +10,15 @@
   },
   "plugins": [
     {
+      "name": "dh-comunicazione",
+      "source": "./plugins/dh-comunicazione",
+      "description": "Comunicazione del DH: materiali nello stile grafico ufficiale DH UNICA (presentazioni).",
+      "category": "comunicazione",
+      "tags": [
+        "dh-unica"
+      ]
+    },
+    {
       "name": "dh-siti",
       "source": "./plugins/dh-siti",
       "description": "Siti web del DH: ricognizione e migrazione di minisiti di progetto nei portali {ambito}.dh.unica.it.",

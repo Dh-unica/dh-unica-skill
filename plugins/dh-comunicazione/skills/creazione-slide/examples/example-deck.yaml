@@ -1,0 +1,105 @@
+# Deck di esempio – ricostruzione del deck "DOG" nello stile DH Unica.
+# Mostra tutti i layout del catalogo. Genera con:
+#   python3 ~/.claude/skills/dh-unica-slides/render.py example-deck.yaml dog.html
+title: "DOG – Ecosistema per le Digital Humanities"
+output: html        # html (default, massima fedeltà) | marp
+# theme:            # override opzionali della palette
+#   navy: "#163a6b"
+
+slides:
+  - layout: cover
+    title: "DOG: Mappare, narrare, esplorare i dati umanistici"
+    subtitle: "Un ecosistema open-source per l'esplorazione spaziale e temporale"
+    contacts:
+      - { name: "Alessandro Capra", role: "DH Unica" }
+      - { name: "Alessandro Laruffa", role: "Istituto Storico Italiano per l'Età Moderna e Contemporanea" }
+
+  - layout: lead-bullets
+    title: "Colonizzazioni e migrazioni"
+    lead: "Analisi del rapporto tra diaspore e politiche di colonizzazione nell'Europa d'età moderna (XVI-XVIII secolo)."
+    bullets:
+      - "Geolocalizzazione di documenti, opere d'arte e cartografie."
+      - "Analisi diacronica delle rotte marittime e degli insediamenti costieri."
+      - "Sincronizzazione tra narrazione testuale e mappe interattive."
+
+  - layout: lead-bullets
+    title: "DigitalIstStor (DIS)"
+    lead: "Integrazione del patrimonio archivistico dell'Istituto Storico Italiano per l'Età Moderna e Contemporanea."
+    bullets:
+      - "Analisi dell'Associazione degli Storici Europei fondata da Armando Saitta (1982-1992)."
+      - "Spazializzazione delle interazioni tra blocco sovietico e occidentale."
+      - "Integrazione di confini storici variabili."
+
+  - layout: cards
+    title: "La sfida della frammentazione"
+    lead: "I dati sono spesso isolati in \"silos\" tecnologici. DOG nasce per unificare queste dimensioni in un unico ambiente modulare."
+    cards:
+      - kicker: "Dati geografici"
+        heading: "GIS complessi"
+        body: "Spesso confinati in sistemi GIS difficili da integrare."
+      - kicker: "Oggetti digitali"
+        heading: "Repository statici"
+        body: "Archivi senza contesto spaziale né temporale."
+      - kicker: "Narrazioni temporali"
+        heading: "Timeline disconnesse"
+        body: "Linee del tempo scollegate dalle mappe."
+      - kicker: "Discontinuità"
+        heading: "Interoperabilità assente"
+        body: "Mancanza di interoperabilità tra standard WMS e CMS."
+      - kicker: "Complessità"
+        heading: "Alte competenze"
+        body: "Necessità di forti competenze tecniche per l'integrazione."
+
+  - layout: tech-list
+    title: "L'ecosistema tecnologico"
+    lead: "DOG segue il principio \"Standing on the shoulders of giants\", integrando piattaforme consolidate."
+    items:
+      - { badge: "CMS",  name: "Drupal 10",     body: "Core orchestratore e Presentation Layer." }
+      - { badge: "REPO", name: "Omeka-S",       body: "Gestione di oggetti digitali e metadati (Dublin Core)." }
+      - { badge: "GIS",  name: "GeoNode / WMS", body: "Infrastruttura per dati geospaziali e livelli cartografici." }
+
+  - layout: table
+    title: "Un'infrastruttura interoperabile"
+    headers: ["Livello", "Tecnologia", "Funzione principale", "Standard"]
+    rows:
+      - ["Presentazione",   "Drupal Layout Builder", "Composizione visiva delle pagine", "HTML5 / Twig"]
+      - ["Oggetti Digitali","Omeka-S Repository",     "Gestione item e metadati",          "JSON-LD / API"]
+      - ["Geospaziale",     "GeoNode / GeoServer",    "Pubblicazione mappe e layer",       "WMS / OGC"]
+      - ["Sincronizzazione","Custom Modules",         "Timeline-Map Connector",            "JS / Drupal API"]
+
+  - layout: stats-row
+    title: "Il cuore di DOG: Timeline Map"
+    stats:
+      - { value: "100%", label: "Sincronizzazione" }
+      - { value: "Multi", label: "Layer WMS" }
+      - { value: "API",  label: "Real-time Query" }
+    description: "Il Timeline Map Block consente agli editor di sincronizzare oggetti georeferenziati con una barra temporale. Ogni livello WMS può essere assegnato a un range temporale specifico, permettendo la visualizzazione dinamica del cambiamento."
+
+  - layout: cards
+    title: "Workflow: dai dati al web"
+    lead: "Un processo circolare che favorisce la co-creazione e il riuso dei dati."
+    columns: 3
+    cards:
+      - { kicker: "1", heading: "Modellazione",    body: "Strutturazione dei metadati in Omeka-S (Dublin Core)." }
+      - { kicker: "2", heading: "Spazializzazione", body: "Creazione di layer vettoriali e storici in QGIS/GeoNode." }
+      - { kicker: "3", heading: "Sintesi Web",     body: "Composizione narrativa tramite Drupal Layout Builder." }
+
+  - layout: image-showcase
+    title: "Output"
+    # image: assets/output-screenshot.png   # inserisci qui uno screenshot reale
+
+  - layout: cards
+    title: "Verso una public history digitale"
+    lead: "DOG non è solo uno strumento di ricerca, ma un ponte verso il pubblico. L'architettura \"Headless\" (API-first) apre la strada a future applicazioni flessibili e scalabili."
+    columns: 3
+    cards:
+      - { heading: "Percorsi narrativi", body: "Percorsi guidati per non specialisti." }
+      - { heading: "Shared Authority",   body: "Re-interpretazione dialogica della storia." }
+      - { heading: "Accessibilità",      body: "Visualizzazione intuitiva di fenomeni complessi." }
+
+  - layout: closing
+    title: "Domande?"
+    subtitle: "DOG: Drupal – Omeka-S – GeoNode"
+    credits:
+      - "Sviluppato da: DH UNICA Lab, Cagliari"
+      - { site: "dh.unica.it" }

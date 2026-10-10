@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{TITLE}}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&family=Lora:ital,wght@0,500;0,600;0,700;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+  <style>{{THEME_OVERRIDES}}</style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    {{SLIDES}}
+  </div>
+
+  <div class="nav-zone prev-zone">
+    <button class="nav-btn prev" id="prevBtn" aria-label="Slide precedente">&#8249;</button>
+  </div>
+  <div class="nav-zone next-zone">
+    <button class="nav-btn next" id="nextBtn" aria-label="Slide successiva">&#8250;</button>
+  </div>
+  <div class="nav-counter" id="counter">1 / 1</div>
+  <button class="nav-fullscreen" id="fsBtn" aria-label="Fullscreen">&#9974; Fullscreen</button>
+
+  <script>
+  (function () {
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
+    const counter = document.getElementById('counter');
+    const fsBtn = document.getElementById('fsBtn');
+    let idx = 0;
+    const SLIDE_W = 1920, SLIDE_H = 1080;
+
+    function fitScale() {
+      const sx = window.innerWidth / SLIDE_W;
+      const sy = window.innerHeight / SLIDE_H;
+      const scale = Math.min(sx, sy);
+      slides.forEach(s => s.style.setProperty('--scale', scale));
+    }
+    function show(i) {
+      idx = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach((s, n) => s.classList.toggle('active', n === idx));
+      counter.textContent = (idx + 1) + ' / ' + slides.length;
+      prev.disabled = idx === 0;
+      next.disabled = idx === slides.length - 1;
+      history.replaceState(null, '', '#' + (idx + 1));
+    }
+    prev.addEventListener('click', () => show(idx - 1));
+    next.addEventListener('click', () => show(idx + 1));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(idx + 1); }
+      else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(idx - 1); }
+      else if (e.key === 'Home') { show(0); }
+      else if (e.key === 'End')  { show(slides.length - 1); }
+      else if (e.key === 'f' || e.key === 'F') { toggleFullscreen(); }
+    });
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        if (document.documentElement.requestFullscreen) document.documentElement.requestFullscreen();
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+    fsBtn.addEventListener('click', toggleFullscreen);
+    window.addEventListener('resize', fitScale);
+    fitScale();
+    const hash = parseInt((location.hash || '').replace('#', ''), 10);
+    show(Number.isFinite(hash) && hash > 0 ? hash - 1 : 0);
+  })();
+  </script>
+</body>
+</html>
