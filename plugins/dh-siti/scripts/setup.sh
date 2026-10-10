@@ -4,7 +4,11 @@
 # dalla skill si passa ${CLAUDE_PLUGIN_DATA}/venv.
 set -euo pipefail
 HERE="$(cd "$(dirname "$0")" && pwd)"
-VENV="${1:?indicare la cartella del virtualenv, es. \${CLAUDE_PLUGIN_DATA}/venv}"
+if [ $# -lt 1 ] || [ -z "$1" ]; then
+  echo "uso: setup.sh <cartella-venv>   (dalla skill: CLAUDE_PLUGIN_DATA/venv)" >&2
+  exit 2
+fi
+VENV="$1"
 if [ ! -x "$VENV/bin/python" ]; then
   python3 -m venv "$VENV"
 fi
