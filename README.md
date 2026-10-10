@@ -15,6 +15,7 @@ controllando il risultato. Le skill sono raccolte in **plugin**, uno per area di
 | `dh-siti` | `/dh-siti:migrazione-minisito` | Migra un minisito di progetto nel portale `{ambito}.dh.unica.it` | produzione |
 | `dh-strumenti` | `/dh-strumenti:crea-skill` | Crea una nuova skill secondo lo standard DH | bozze |
 | `dh-comunicazione` | `/dh-comunicazione:creazione-slide` | Genera presentazioni nello stile grafico ufficiale DH UNICA | bozze |
+| `dh-dati` | `/dh-dati:pubblicazione-dataset` | Trasforma un dataset di ricerca umanistica in un'app statica esplorabile per GitHub Pages e WordPress | bozze |
 <!-- fine-catalogo -->
 
 **Livello** indica cosa può modificare la skill:

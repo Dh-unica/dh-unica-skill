@@ -1,0 +1,19 @@
+{
+  "name": "dh-dati",
+  "version": "1.0.0",
+  "description": "Dati di ricerca del DH: dalla fonte (PDF/OCR, fogli, archivi, Zenodo) a esperienze esplorabili pubblicabili.",
+  "author": {
+    "name": "Alessandro Capra (@caprowsky)",
+    "url": "https://dh.unica.it"
+  },
+  "homepage": "https://github.com/Dh-unica/dh-unica-skill/tree/main/plugins/dh-dati",
+  "repository": "https://github.com/Dh-unica/dh-unica-skill",
+  "license": "MIT",
+  "keywords": [
+    "dataset",
+    "zenodo",
+    "github-pages",
+    "wordpress",
+    "dh-unica"
+  ]
+}

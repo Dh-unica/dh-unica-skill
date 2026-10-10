@@ -19,6 +19,15 @@
       ]
     },
     {
+      "name": "dh-dati",
+      "source": "./plugins/dh-dati",
+      "description": "Dati di ricerca del DH: dalla fonte (PDF/OCR, fogli, archivi, Zenodo) a esperienze esplorabili pubblicabili.",
+      "category": "dati",
+      "tags": [
+        "dh-unica"
+      ]
+    },
+    {
       "name": "dh-siti",
       "source": "./plugins/dh-siti",
       "description": "Siti web del DH: ricognizione e migrazione di minisiti di progetto nei portali {ambito}.dh.unica.it.",
