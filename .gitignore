@@ -1,0 +1,14 @@
+# ambienti e cache
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+# cartelle di lavoro delle skill
+work/
+*-workspace/
+.playwright-mcp/
+# credenziali: mai nel repo
+*.env
+.env*
+credenziali*
