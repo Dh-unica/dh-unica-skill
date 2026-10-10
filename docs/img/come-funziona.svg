@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" width="960" height="470" role="img" aria-labelledby="t d">
+  <title id="t">Come funziona dh-unica-skill</title>
+  <desc id="d">Il repository GitHub contiene i plugin per area (dh-siti, dh-dati, dh-comunicazione, dh-strumenti); ogni plugin contiene skill; le skill si installano in Claude Code come plugin o si copiano come cartelle SKILL.md negli altri agenti compatibili.</desc>
+  <style>
+    .bg{fill:#ffffff}
+    .h{font:700 17px 'Titillium Web','Segoe UI',Arial,sans-serif;fill:#163a6b}
+    .t{font:600 14px 'Titillium Web','Segoe UI',Arial,sans-serif;fill:#163a6b}
+    .s{font:400 12.5px 'Titillium Web','Segoe UI',Arial,sans-serif;fill:#3d4a5c}
+    .w{font:700 13px 'Titillium Web','Segoe UI',Arial,sans-serif;fill:#ffffff}
+    .c{font:600 12.5px ui-monospace,'SFMono-Regular',Menlo,monospace;fill:#2f4299}
+    .box{fill:#eef1f5;stroke:#c9d2de;stroke-width:1}
+    .plug{fill:#ffffff;stroke:#2f4299;stroke-width:1.5}
+    .arrow{stroke:#3980bf;stroke-width:2.5;fill:none;marker-end:url(#a)}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#3980bf"/>
+    </marker>
+    <linearGradient id="g" x1="0" x2="1">
+      <stop offset="0" stop-color="#163a6b"/><stop offset=".55" stop-color="#2f4299"/><stop offset="1" stop-color="#27a7e5"/>
+    </linearGradient>
+  </defs>
+  <rect class="bg" x="0" y="0" width="960" height="470" rx="16"/>
+  <rect x="0" y="462" width="960" height="8" fill="url(#g)"/>
+
+  <!-- 1. repository -->
+  <rect class="box" x="24" y="24" width="300" height="410" rx="12"/>
+  <rect x="24" y="24" width="6" height="410" rx="3" fill="#2f4299"/>
+  <text class="h" x="44" y="56">1 · Il marketplace</text>
+  <text class="c" x="44" y="80">github.com/Dh-unica/dh-unica-skill</text>
+  <text class="s" x="44" y="102">plugin per area di lavoro, con le stesse</text>
+  <text class="s" x="44" y="119">regole, README e controlli automatici</text>
+
+  <rect class="plug" x="44" y="138" width="260" height="56" rx="8"/>
+  <text class="t" x="58" y="161">dh-siti</text>
+  <text class="s" x="58" y="181">ricognizione · migrazione minisiti</text>
+  <rect class="plug" x="44" y="204" width="260" height="56" rx="8"/>
+  <text class="t" x="58" y="227">dh-dati</text>
+  <text class="s" x="58" y="247">pubblicazione di dataset di ricerca</text>
+  <rect class="plug" x="44" y="270" width="260" height="56" rx="8"/>
+  <text class="t" x="58" y="293">dh-comunicazione</text>
+  <text class="s" x="58" y="313">presentazioni in stile DH UNICA</text>
+  <rect class="plug" x="44" y="336" width="260" height="56" rx="8"/>
+  <text class="t" x="58" y="359">dh-strumenti</text>
+  <text class="s" x="58" y="379">crea nuove skill secondo lo standard</text>
+  <text class="s" x="44" y="418">+ CONTRIBUTING.md · check_skills.py · CI</text>
+
+  <path class="arrow" d="M330,229 L380,229"/>
+
+  <!-- 2. skill -->
+  <rect class="box" x="388" y="24" width="250" height="410" rx="12"/>
+  <rect x="388" y="24" width="6" height="410" rx="3" fill="#3980bf"/>
+  <text class="h" x="408" y="56">2 · La skill</text>
+  <text class="s" x="408" y="80">una cartella con istruzioni e strumenti</text>
+  <rect class="plug" x="408" y="98" width="210" height="190" rx="8"/>
+  <text class="c" x="422" y="124">migrazione-minisito/</text>
+  <text class="c" x="436" y="150">SKILL.md</text>
+  <text class="s" x="436" y="167">regole, domande, procedura</text>
+  <text class="c" x="436" y="193">references/</text>
+  <text class="s" x="436" y="210">conoscenza di dominio</text>
+  <text class="c" x="436" y="236">scripts/  assets/</text>
+  <text class="s" x="436" y="253">codice testato, modelli</text>
+  <text class="s" x="422" y="276">standard aperto Agent Skills</text>
+  <text class="t" x="408" y="318">Quando la usi:</text>
+  <text class="s" x="408" y="340">1. chiedi in linguaggio naturale</text>
+  <text class="s" x="408" y="360">2. la skill ti fa le domande</text>
+  <text class="s" x="421" y="377">sulle scelte da decidere</text>
+  <text class="s" x="408" y="397">3. esegue, verifica, ti riporta</text>
+  <text class="s" x="421" y="414">l'esito e cosa resta da fare</text>
+
+  <path class="arrow" d="M644,229 L694,229"/>
+
+  <!-- 3. agenti -->
+  <rect class="box" x="702" y="24" width="234" height="410" rx="12"/>
+  <rect x="702" y="24" width="6" height="410" rx="3" fill="#27a7e5"/>
+  <text class="h" x="722" y="56">3 · Gli agenti</text>
+  <rect x="722" y="74" width="194" height="96" rx="8" fill="#163a6b"/>
+  <text class="w" x="736" y="98">Claude Code</text>
+  <text class="s" x="736" y="118" style="fill:#dfe7f3">installazione come plugin,</text>
+  <text class="s" x="736" y="135" style="fill:#dfe7f3">aggiornamenti automatici</text>
+  <text class="c" x="736" y="158" style="fill:#9fd8f5">/plugin install …</text>
+  <text class="t" x="722" y="200">e molti altri, copiando</text>
+  <text class="t" x="722" y="218">la cartella della skill:</text>
+  <text class="s" x="722" y="244">OpenAI Codex · ChatGPT</text>
+  <text class="s" x="722" y="264">GitHub Copilot · VS Code</text>
+  <text class="s" x="722" y="284">Cursor · Gemini CLI</text>
+  <text class="s" x="722" y="304">JetBrains Junie · Kiro</text>
+  <text class="s" x="722" y="324">OpenCode · Goose · Amp</text>
+  <text class="s" x="722" y="344">Factory · Letta · Cline …</text>
+  <text class="c" x="722" y="376">.agents/skills/</text>
+  <text class="s" x="722" y="396">cartella comune alla</text>
+  <text class="s" x="722" y="413">maggior parte degli agenti</text>
+</svg>
