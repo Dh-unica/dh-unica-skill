@@ -1,0 +1,12 @@
+{
+  "name": "{{plugin}}",
+  "version": "0.1.0",
+  "description": "{{plugin_descrizione}}",
+  "author": {
+    "name": "{{manutentore}}",
+    "url": "https://dh.unica.it"
+  },
+  "homepage": "https://github.com/Dh-unica/dh-unica-skill/tree/main/plugins/{{plugin}}",
+  "repository": "https://github.com/Dh-unica/dh-unica-skill",
+  "keywords": ["dh-unica"]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "dh-siti",
+  "version": "1.0.0",
+  "description": "Ricognizione e migrazione di minisiti di progetto (WordPress/Elementor o HTML statico) nei portali DH UNICA secondo la name convention {ambito}.dh.unica.it/{progetto}/.",
+  "author": {
+    "name": "Centro DH UNICA",
+    "url": "https://dh.unica.it"
+  },
+  "homepage": "https://github.com/Dh-unica/dh-unica-skill/tree/main/plugins/dh-siti",
+  "repository": "https://github.com/Dh-unica/dh-unica-skill",
+  "keywords": ["wordpress", "migrazione", "minisiti", "dh-unica"]
+}

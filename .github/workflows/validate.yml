@@ -1,0 +1,33 @@
+name: Validazione marketplace
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  standard-dh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Dipendenze
+        run: pip install pyyaml pytest
+      - name: Standard DH (check_skills.py)
+        run: python3 plugins/dh-strumenti/skills/crea-skill/scripts/check_skills.py .
+      - name: Test del marketplace
+        run: python3 -m pytest -q
+
+  claude-plugin-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+      - name: claude plugin validate
+        run: claude plugin validate . --strict
