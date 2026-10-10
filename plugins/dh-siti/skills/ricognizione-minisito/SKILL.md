@@ -42,7 +42,7 @@ all'inizio di ogni comando che lo usa.
 
 ```bash
 $DHM survey --source https://<minisito> --slug <progetto> --ambito <ambito> \
-            --credentials ~/.config/dh-wp/<ambito>.env --workdir <cartella-progetto>/work
+            --workdir <cartella-progetto>/work
 ```
 
 1. Leggi `work/<progetto>/survey.md` e `config.proposta.yaml`. In `survey.md` c'è anche l'albero del

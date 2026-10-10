@@ -13,7 +13,7 @@ source:
 
 target:
   url: https://storia.dh.unica.it
-  credentials: ~/.config/dh-wp/storia.env   # WP_USER, WP_APP_PASSWORD (mai nel repo)
+  credentials: ~/.config/dh-unica/wp-storia.env   # creato da `dhmigrate login` (mai nel repo)
   template: page-fullwidth.php
 
 # Albero di destinazione. parent = source_slug del genitore (assente = radice di progetto).

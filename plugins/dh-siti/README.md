@@ -45,7 +45,7 @@ Al primo uso la skill prepara da sé l'ambiente Python (serve `python3` ≥ 3.10
   con un nome riconoscibile (es. `dhmigrate-<cognome>-<progetto>`).
 - La password va salvata **da te, nel tuo terminale**, senza incollarla in chat. Quando la skill te lo
   chiede, esegui il comando che ti propone (inizia con `!`). Il comando chiede utente e password
-  (nascosta), li verifica e li salva in `~/.config/dh-wp/<ambito>.env`, leggibile solo da te.
+  (nascosta), li verifica e li salva in `~/.config/dh-unica/wp-<ambito>.env`, leggibile solo da te.
 
 ## Come si avvia
 

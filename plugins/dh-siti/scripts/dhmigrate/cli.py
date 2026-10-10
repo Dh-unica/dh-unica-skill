@@ -22,7 +22,7 @@ log = logging.getLogger("dhmigrate")
 
 
 def cmd_login(args) -> int:
-    """Salva l'Application Password in ~/.config/dh-wp/<ambito>.env dopo averla verificata.
+    """Salva l'Application Password in ~/.config/dh-unica/wp-<ambito>.env dopo averla verificata.
 
     Va eseguito dall'utente nel proprio terminale (in Claude Code: prefisso `!`), così la
     password non passa mai nella conversazione.
@@ -30,11 +30,11 @@ def cmd_login(args) -> int:
     import getpass
     from urllib.parse import urlparse
 
-    from .wp_client import Credentials, save_credentials
+    from .wp_client import Credentials, default_credentials_path, save_credentials
 
     url = args.url.rstrip("/")
     ambito = urlparse(url).netloc.split(".")[0]
-    path = Path(args.credentials).expanduser() if args.credentials_given else Path(f"~/.config/dh-wp/{ambito}.env").expanduser()
+    path = Path(args.credentials).expanduser() if args.credentials else default_credentials_path(ambito)
     user = input(f"Utente WordPress su {url}: ").strip()
     password = getpass.getpass("Application Password (non viene mostrata): ").strip()
     me = WPClient(url, Credentials(user, password), make_session()).me()
@@ -48,10 +48,15 @@ def cmd_login(args) -> int:
 
 def cmd_survey(args) -> int:
     """Ricognizione: non richiede config, la propone."""
-    creds_path = Path(args.credentials).expanduser()
-    creds = load_credentials(creds_path) if creds_path.exists() else None
-    sv, _, report = run_survey(args.source, args.slug, args.ambito, make_session(), creds, Path(args.workdir),
-                               args.credentials)
+    from .wp_client import default_credentials_path
+
+    creds_path = Path(args.credentials).expanduser() if args.credentials else default_credentials_path(args.ambito)
+    try:
+        creds = load_credentials(creds_path)
+    except WPError:
+        creds = None
+    shown = args.credentials or f"~/.config/dh-unica/wp-{args.ambito}.env"
+    sv, _, report = run_survey(args.source, args.slug, args.ambito, make_session(), creds, Path(args.workdir), shown)
     print(report.read_text(encoding="utf-8"))
     print(f"config proposta: {report.parent / 'config.proposta.yaml'}")
     return 1 if any(i.startswith("CONFLITTO") for i in sv.issues) else 0
@@ -158,7 +163,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--source", help="survey: URL del minisito sorgente")
     parser.add_argument("--slug", help="survey: slug di progetto (name convention)")
     parser.add_argument("--ambito", help="survey: sottodominio DH (storia, musica, cinema, ...)")
-    parser.add_argument("--credentials", default="~/.config/dh-wp/storia.env", help="survey: file credenziali")
+    parser.add_argument("--credentials", help="login/survey: file credenziali (default ~/.config/dh-unica/wp-<ambito>.env)")
     parser.add_argument("--workdir", default="work", help="survey: cartella di lavoro")
     parser.add_argument("--dry-run", action="store_true", help="nessuna scrittura sulla destinazione")
     parser.add_argument("--status", default="draft", choices=["draft", "publish"], help="stato pagine in load")
@@ -173,7 +178,6 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO, format="%(levelname)s %(message)s")
-    args.credentials_given = any(a.startswith("--credentials") for a in (argv or sys.argv[1:]))
     if args.command == "login":
         if not args.url:
             parser.error("login richiede --url (es. https://storia.dh.unica.it)")
