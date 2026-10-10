@@ -1,0 +1,75 @@
+/* @theme dh-unica
+   Tema Marp nello stile DH Unica (dh.unica.it).
+   Usa: marp deck.md --theme dh-unica-theme.css --pdf --allow-local-files */
+
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;600;700&family=Lora:ital,wght@0,600;0,700;1,500&display=swap');
+
+:root {
+  --dh-navy: #163a6b;
+  --dh-navy-deep: #102a4e;
+  --dh-blue: #2f4299;
+  --dh-blue-mid: #3980bf;
+  --dh-cyan: #27a7e5;
+  --dh-ink: #19191a;
+  --dh-ink-soft: #45576b;
+  --dh-panel: #eef1f5;
+  --dh-border: #d6dce3;
+  --dh-serif: "Lora", Georgia, serif;
+  --dh-sans: "Titillium Web", Geneva, Tahoma, sans-serif;
+}
+
+section {
+  font-family: var(--dh-sans);
+  font-size: 26px;
+  color: var(--dh-ink);
+  background: #fff;
+  padding: 70px 90px;
+}
+
+/* strip gradient + barra verticale nei titoli */
+section::after { color: var(--dh-ink); }
+section::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0; height: 8px;
+  background: linear-gradient(90deg, var(--dh-navy), var(--dh-blue) 45%, var(--dh-cyan));
+}
+
+h1 {
+  font-family: var(--dh-serif);
+  font-weight: 700;
+  color: var(--dh-navy);
+  font-size: 54px;
+  border-left: 8px solid var(--dh-blue);
+  padding-left: 24px;
+  line-height: 1.1;
+}
+h2, h3 { font-family: var(--dh-sans); color: var(--dh-navy); }
+strong { color: var(--dh-navy); }
+a { color: var(--dh-blue-mid); }
+ul li::marker { color: var(--dh-blue); }
+
+table { font-size: 22px; border-collapse: collapse; }
+th { background: var(--dh-navy-deep); color: #fff; padding: 14px 20px; text-align: left; }
+td { padding: 12px 20px; border-bottom: 1px solid var(--dh-border); }
+tr:nth-child(even) { background: var(--dh-panel); }
+
+.cards { display: flex; gap: 24px; margin-top: 24px; }
+.cards .card { flex: 1; border: 1px solid var(--dh-border); border-top: 6px solid var(--dh-blue); border-radius: 12px; padding: 24px; }
+.cards .card h3 { color: var(--dh-navy); margin: 0 0 8px; }
+.stats { display: flex; gap: 40px; justify-content: center; text-align: center; margin: 30px 0; }
+.stats b { font-family: var(--dh-serif); font-size: 80px; color: var(--dh-navy); display: block; }
+
+/* cover */
+section.cover { display: flex; flex-direction: column; justify-content: center; }
+section.cover h1 { font-size: 74px; border: none; padding: 0; }
+section.cover em { color: var(--dh-blue-mid); font-style: normal; font-size: 30px; font-weight: 600; }
+
+/* divider */
+section.divider { display: flex; flex-direction: column; justify-content: center; }
+section.divider h1 { font-size: 100px; }
+
+/* closing */
+section.closing { background: var(--dh-navy); color: #fff; display: flex; flex-direction: column; justify-content: center; }
+section.closing h1 { color: #fff; border: none; padding: 0; font-size: 110px; }
+section.closing::before { background: linear-gradient(90deg, #fff2, var(--dh-cyan)); }
