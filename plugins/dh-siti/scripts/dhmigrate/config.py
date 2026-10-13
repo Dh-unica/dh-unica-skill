@@ -41,10 +41,23 @@ class MenuConfig:
 
 
 @dataclass(frozen=True)
+class HeaderConfig:
+    """Testata propria del progetto: sulle pagine del progetto sostituisce titolo, menu globale e
+    <title> del portale, come un sito a sé dentro il DH (vedi testata.py)."""
+
+    title: str = ""  # default: project.title
+    subtitle: str = ""  # sottotitolo sotto il titolo (h3 del tema)
+    banner: str | None = None  # URL sorgente dell'immagine di fondo (risolto sui media caricati)
+    links: tuple[dict, ...] = ()  # barra alta, es. [{label: Storia Digitale UniCA, url: ...}]
+    hide_root_title: bool = True  # radice senza titolo del tema: è già nella testata (e di solito nel banner)
+
+
+@dataclass(frozen=True)
 class SectionNav:
     """Barra di sezione in testa alle pagine del progetto (percorso + menu del progetto)."""
 
     breadcrumb: tuple[dict, ...] = ()  # voci prima del progetto, es. [{label: Progetti, url: ...}]
+    header: HeaderConfig | None = None  # None = solo barra in pagina, testata del portale invariata
 
 
 @dataclass(frozen=True)
@@ -156,6 +169,15 @@ def validate(cfg: Config) -> list[str]:
     return errors
 
 
+def _section_nav(raw: dict | None) -> SectionNav | None:
+    if not raw:
+        return None
+    header = raw.get("header")
+    if header:
+        header = HeaderConfig(**{**header, "links": tuple(header.get("links", []))})
+    return SectionNav(tuple(raw.get("breadcrumb", [])), header or None)
+
+
 def load_config(path: str | Path) -> Config:
     raw = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
     try:
@@ -174,7 +196,7 @@ def load_config(path: str | Path) -> Config:
             pages=tuple(PageMap(**p) for p in raw["pages"]),
             partners=tuple(Partner(**p) for p in raw.get("partners", [])),
             menu=MenuConfig(**raw["menu"]) if raw.get("menu") else None,
-            section_nav=SectionNav(tuple(raw["section_nav"].get("breadcrumb", []))) if raw.get("section_nav") else None,
+            section_nav=_section_nav(raw.get("section_nav")),
             notes=raw.get("notes", {}),
         )
     except (KeyError, TypeError) as exc:

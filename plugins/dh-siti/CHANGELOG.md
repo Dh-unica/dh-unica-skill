@@ -4,6 +4,18 @@ Formato: [Keep a Changelog](https://keepachangelog.com/it/1.1.0/), versioni [Sem
 Ogni modifica pubblicata incrementa `version` in `.claude-plugin/plugin.json`: senza, i collaboratori
 non ricevono l'aggiornamento.
 
+## [1.1.0] - 2026-10-13
+
+### Aggiunto
+- Testata propria del progetto (`section_nav.header`): sulle pagine del progetto titolo, banner, menu e
+  `<title>` sono quelli del progetto e il ritorno al portale sta nella barra alta, come in «Colonizzazioni
+  interne». Risolve l'effetto «sito dentro un sito» segnalato dal PI di laricchezzadellachiesa.
+- `dhmigrate menu` aggiorna anche barra di sezione e testata, senza riscrivere le pagine.
+- Con la testata attiva nel menu globale resta solo la voce del progetto: `dhmigrate menu` non crea
+  sottovoci, cancella quelle proprie rimaste e non ricrea quelle tolte a mano.
+- La radice del progetto non mostra il titolo del tema (già nella testata e nel banner),
+  configurabile con `section_nav.header.hide_root_title`.
+
 ## [1.0.2] - 2026-10-10
 
 ### Corretto

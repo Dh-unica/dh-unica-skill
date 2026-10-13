@@ -207,11 +207,17 @@ def prune_unused_media(client: WPClient, state: State, used: set[str]) -> list[i
     return removed
 
 
+def header_media(cfg: Config) -> set[str]:
+    """Media usati dalla testata del progetto (fuori dal contenuto delle pagine)."""
+    header = cfg.section_nav.header if cfg.section_nav else None
+    return {header.banner} if header and header.banner else set()
+
+
 def load(cfg: Config, client: WPClient, source: requests.Session, status: str = "draft") -> dict:
     state = open_state(cfg, client)
     who = preflight(cfg, client, state)
     first_pass = transform_site(cfg, media_map=state.media, write=False)
-    needed = set().union(*(r.media for r in first_pass.values()))
+    needed = set().union(*(r.media for r in first_pass.values())) | header_media(cfg)
     uploaded = upload_media(cfg, client, state, needed, source)
     section_ref = state.section_nav.get("block_id")
     final = transform_site(cfg, media_map=state.media, write=True, section_ref=section_ref)
@@ -224,7 +230,7 @@ def load(cfg: Config, client: WPClient, source: requests.Session, status: str = 
         # primo giro: il pattern è appena nato, lo inseriamo in testa alle pagine
         final = transform_site(cfg, media_map=state.media, write=True, section_ref=state.section_nav["block_id"])
         pages = upsert_pages(cfg, client, state, final, status)
-    pruned = prune_unused_media(client, state, set().union(*(r.media for r in final.values())))
+    pruned = prune_unused_media(client, state, set().union(*(r.media for r in final.values())) | header_media(cfg))
     return {"user": who, "section_nav": section, "media_uploaded": uploaded, "media_pruned": pruned, "media_total": len(state.media),
             "pages": pages}
 

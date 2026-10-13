@@ -99,10 +99,17 @@ richiederla, ma riportala nel riepilogo.
    del portale») e proponi «sotto *Progetti*, dopo l'ultimo progetto». Chiedi conferma della voce
    genitore e dell'**etichetta** della voce del progetto (es. «La ricchezza della Chiesa»).
 6. **Sottovoci del progetto**: proponi le voci del menu sorgente, Home esclusa. Chiedi se aggiungerne o
-   toglierne e se rinominarle. Le stesse voci compaiono nel menu globale e nella barra di sezione.
-7. **Barra di sezione**: conferma il percorso (default `Progetti`, con link alla pagina o categoria
-   «Progetti» del portale) e se attivarla. Consigliata sempre: senza barra l'utente si perde nelle
-   sottopagine.
+   toglierne e se rinominarle. Con la testata del progetto (punto 7) le voci stanno **solo** nel menu
+   della testata e nel menu globale resta la sola voce del progetto: `dhmigrate menu` non crea
+   sottovoci e cancella quelle proprie rimaste. Senza testata compaiono nel menu globale e nella barra
+   di sezione.
+7. **Testata del progetto**: proponi la testata propria (consigliata): sulle pagine del progetto titolo,
+   menu e `<title>` sono quelli del progetto e il ritorno al portale sta nella barra alta, come in
+   «Colonizzazioni interne». Chiedi sottotitolo, immagine di banner (di solito l'immagine di copertina
+   del sito sorgente) e link della barra alta (default `Storia Digitale UniCA` e `DH UniCA`). Il
+   percorso della barra di sezione (default `Progetti`) resta come ripiego per chi non ha JavaScript.
+   Senza testata, il progetto si naviga dal menu globale più la barra in pagina: è il caso che i PI
+   hanno trovato confuso («un sito dentro un sito»).
 8. **Albero delle URL e rinomine**: mostra l'albero proposto e le rinomine consigliate (es. slug
    inglesi o generici come `about` → `progetto`).
 9. **Titolo della pagina radice** (nome esteso del progetto).
@@ -154,6 +161,11 @@ Copia `config.proposta.yaml` in `config/<progetto>.yaml` e rifinisci; un esempio
   sezione (ordine = ordine in config);
 - `section_nav.breadcrumb`: voci del percorso prima del progetto (es. `[{label: Progetti, url: …}]`);
   ometti la sezione per non creare la barra;
+- `section_nav.header`: testata propria del progetto: `title` (default `project.title`), `subtitle`,
+  `banner` (URL sorgente dell'immagine, caricata tra i media), `links` (barra alta, ritorno al portale)
+  e `hide_root_title` (default `true`: la radice non mostra il titolo del tema, che ripeterebbe quello
+  della testata e del banner; resta come `<h1>` nascosto alla vista). La radice entra nel menu del
+  progetto con il suo `menu_label` (es. `Home`);
 - `pages[].image_width`: larghezza uniforme delle immagini di contenuto (es. le foto dell'équipe);
 - `partners`: loghi del footer sorgente → blocco «Partner e finanziatori» sulla radice;
 - `notes.form_replacement`: testo che sostituisce i moduli di contatto non migrabili;
@@ -197,13 +209,17 @@ $DHM verify        --config config/<progetto>.yaml   # ora controlla anche HTTP 
 ```
 
 Le voci di menu si creano solo con le pagine pubblicate, perché WordPress nasconde quelle che puntano a
-bozze. Per riallineare solo il menu (dopo aver cambiato `menu` o un `menu_label`):
-`$DHM menu --dry-run …`, poi `$DHM menu --yes …`. Le voci vengono inserite subito dopo l'ultimo figlio
+bozze. Per riallineare solo la navigazione (dopo aver cambiato `menu`, `section_nav` o un `menu_label`):
+`$DHM menu --dry-run …`, poi `$DHM menu --yes …`: aggiorna voci del menu globale, barra di sezione e
+testata senza riscrivere le pagine. Le voci vengono inserite subito dopo l'ultimo figlio
 della voce genitore; le voci successive scalano in avanti e il loro ordine originale finisce in
 `state.json`, così il rollback lo ripristina.
 
 Controlla il menu nel browser: passa il mouse su «Progetti» e poi sulla voce del progetto, e fai uno
-screenshot del sottomenu aperto.
+screenshot del sottomenu aperto. Con la testata attiva controlla anche, su una pagina del progetto, il
+titolo nella testata e nella scheda del browser, la voce corrente evidenziata (anche nelle sottopagine),
+il menu mobile (icona ☰), che una pagina fuori dal progetto mostri ancora la testata del portale e che
+nessun titolo compaia due volte di seguito (testata, titolo della pagina, banner del contenuto).
 
 Screenshot con Playwright MCP, desktop (1366) e mobile (390), di radice, pagina più ricca e Contatti.
 **Prima di fotografare scorri tutta la pagina**: immagini e iframe sono in lazy-load e altrimenti

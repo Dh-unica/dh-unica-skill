@@ -45,6 +45,15 @@ menu:
 section_nav:
   breadcrumb:
     - {label: Progetti, url: "https://storia.dh.unica.it/category/progetti/"}
+  # Testata propria (richiesta del PI, 13/10/2026): sulle pagine del progetto titolo, banner e menu sono
+  # quelli del progetto, il ritorno al portale sta nella barra alta (modello: Colonizzazioni interne).
+  # Con la testata attiva la barra qui sopra resta solo come ripiego per chi non ha JavaScript.
+  header:
+    subtitle: "dal basso Medioevo all'età contemporanea. Aspetti economici, giuridici e politici"
+    banner: https://laricchezzadellachiesa.com/wp-content/uploads/2024/12/Angelico_niccolina_14.jpg
+    links:
+      - {label: Storia Digitale UniCA, url: "https://storia.dh.unica.it/"}
+      - {label: DH UniCA, url: "https://dh.unica.it/"}
 
 # Footer del minisito sorgente -> blocco "Partner e finanziatori" nella pagina radice
 partners:

@@ -47,9 +47,15 @@ def render_tree(items: list[dict], parent: int = 0, depth: int = 0) -> list[str]
 
 
 def planned_entries(cfg: Config, page_ids: dict[str, int]) -> list[dict]:
-    """Voci da creare, nell'ordine: prima la radice, poi le sottovoci."""
+    """Voci da creare, nell'ordine: prima la radice, poi le sottovoci.
+
+    Con la testata propria il menu del progetto sta nella testata: nel menu globale resta solo la voce
+    del progetto, punto d'ingresso dal portale (sottovoci anche lì = doppio livello di navigazione).
+    """
     label = cfg.menu.label or cfg.root.title or cfg.project_slug
     entries = [{"key": cfg.root.source_slug, "title": label, "object_id": page_ids[cfg.root.source_slug], "child": False}]
+    if cfg.section_nav is not None and cfg.section_nav.header is not None:
+        return entries
     for page in cfg.pages:
         if page.menu_label and page.parent is not None:
             entries.append({"key": page.source_slug, "title": page.menu_label,
@@ -75,8 +81,14 @@ def sync_menu(cfg: Config, client: WPClient, state) -> dict:
     entries = planned_entries(cfg, page_ids)
     own = state.menu.setdefault("items", {})
     stale = [key for key, item_id in own.items() if item_id not in by_id]
-    for key in stale:  # voce cancellata a mano dal pannello: la ricreiamo
+    for key in stale:  # voce cancellata a mano dal pannello: la ricreiamo se ancora prevista
         del own[key]
+    planned_keys = {e["key"] for e in entries}
+    removed = []
+    for key in [k for k in own if k not in planned_keys]:  # voci nostre non più previste (es. testata attivata)
+        client.delete_menu_item(own[key])
+        removed.append(own.pop(key))
+    state.save()
 
     missing = [e for e in entries if e["key"] not in own]
     if missing:
@@ -112,7 +124,7 @@ def sync_menu(cfg: Config, client: WPClient, state) -> dict:
             action = "creata"
         report.append({"voce": entry["title"], "id": own[entry["key"]], "azione": action})
         log.info("voce di menu %s: %s (id %s)", action, entry["title"], own[entry["key"]])
-    return {"menu_id": menu_id, "parent": cfg.menu.parent, "items": report}
+    return {"menu_id": menu_id, "parent": cfg.menu.parent, "items": report, "removed": removed}
 
 
 def remove_menu(client: WPClient, state) -> dict:
