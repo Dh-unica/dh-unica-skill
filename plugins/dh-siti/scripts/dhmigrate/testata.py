@@ -26,7 +26,8 @@ SCRIPT = """<script>
   if (!el) return;
   var cfg = JSON.parse(el.textContent), h = d.getElementById('header');
   if (!h) return;
-  d.documentElement.className += ' dh-testata';
+  var radice = location.pathname.replace(/\/?$/, '/') === new URL(cfg.home).pathname;
+  d.documentElement.className += ' dh-testata' + (radice && cfg.hide_root_title ? ' dh-testata-radice' : '');
   function link(item) {
     var a = d.createElement('a');
     a.href = item.url;
@@ -81,7 +82,7 @@ def header_data(cfg: Config, media_map: dict) -> dict:
     banner = (media_map.get(header.banner) or {}).get("url") if header.banner else None
     return {"home": cfg.target_link(cfg.root.source_slug), "title": header.title or cfg.project_title,
             "subtitle": header.subtitle, "banner": banner, "links": [dict(link) for link in header.links],
-            "items": items}
+            "hide_root_title": header.hide_root_title, "items": items}
 
 
 def css_url(url: str) -> str:
@@ -99,6 +100,7 @@ def header_css(banner: str | None) -> str:
     return f"""<style>
 html.dh-testata .dh-progetto-nav{{display:none}}
 html.dh-testata .entry-content a{{overflow-wrap:anywhere}}
+html.dh-testata-radice #content header.header{{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}}
 html.dh-testata #header .it-brand-wrapper .icon,html.dh-testata #header .it-socials{{display:none!important}}
 .dh-testata-portali{{margin-left:auto;display:flex;gap:1.5rem}}
 .dh-testata-portali a{{color:#fff;font-size:.9rem;text-decoration:none}}

@@ -99,7 +99,10 @@ richiederla, ma riportala nel riepilogo.
    del portale») e proponi «sotto *Progetti*, dopo l'ultimo progetto». Chiedi conferma della voce
    genitore e dell'**etichetta** della voce del progetto (es. «La ricchezza della Chiesa»).
 6. **Sottovoci del progetto**: proponi le voci del menu sorgente, Home esclusa. Chiedi se aggiungerne o
-   toglierne e se rinominarle. Le stesse voci compaiono nel menu globale e nella barra di sezione.
+   toglierne e se rinominarle. Con la testata del progetto (punto 7) le voci stanno **solo** nel menu
+   della testata e nel menu globale resta la sola voce del progetto: `dhmigrate menu` non crea
+   sottovoci e cancella quelle proprie rimaste. Senza testata compaiono nel menu globale e nella barra
+   di sezione.
 7. **Testata del progetto**: proponi la testata propria (consigliata): sulle pagine del progetto titolo,
    menu e `<title>` sono quelli del progetto e il ritorno al portale sta nella barra alta, come in
    «Colonizzazioni interne». Chiedi sottotitolo, immagine di banner (di solito l'immagine di copertina
@@ -159,8 +162,10 @@ Copia `config.proposta.yaml` in `config/<progetto>.yaml` e rifinisci; un esempio
 - `section_nav.breadcrumb`: voci del percorso prima del progetto (es. `[{label: Progetti, url: …}]`);
   ometti la sezione per non creare la barra;
 - `section_nav.header`: testata propria del progetto: `title` (default `project.title`), `subtitle`,
-  `banner` (URL sorgente dell'immagine, caricata tra i media) e `links` (barra alta, ritorno al portale).
-  La radice entra nel menu del progetto con il suo `menu_label` (es. `Home`);
+  `banner` (URL sorgente dell'immagine, caricata tra i media), `links` (barra alta, ritorno al portale)
+  e `hide_root_title` (default `true`: la radice non mostra il titolo del tema, che ripeterebbe quello
+  della testata e del banner; resta come `<h1>` nascosto alla vista). La radice entra nel menu del
+  progetto con il suo `menu_label` (es. `Home`);
 - `pages[].image_width`: larghezza uniforme delle immagini di contenuto (es. le foto dell'équipe);
 - `partners`: loghi del footer sorgente → blocco «Partner e finanziatori» sulla radice;
 - `notes.form_replacement`: testo che sostituisce i moduli di contatto non migrabili;
@@ -213,7 +218,8 @@ della voce genitore; le voci successive scalano in avanti e il loro ordine origi
 Controlla il menu nel browser: passa il mouse su «Progetti» e poi sulla voce del progetto, e fai uno
 screenshot del sottomenu aperto. Con la testata attiva controlla anche, su una pagina del progetto, il
 titolo nella testata e nella scheda del browser, la voce corrente evidenziata (anche nelle sottopagine),
-il menu mobile (icona ☰) e che una pagina fuori dal progetto mostri ancora la testata del portale.
+il menu mobile (icona ☰), che una pagina fuori dal progetto mostri ancora la testata del portale e che
+nessun titolo compaia due volte di seguito (testata, titolo della pagina, banner del contenuto).
 
 Screenshot con Playwright MCP, desktop (1366) e mobile (390), di radice, pagina più ricca e Contatti.
 **Prima di fotografare scorri tutta la pagina**: immagini e iframe sono in lazy-load e altrimenti

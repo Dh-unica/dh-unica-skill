@@ -49,6 +49,7 @@ class HeaderConfig:
     subtitle: str = ""  # sottotitolo sotto il titolo (h3 del tema)
     banner: str | None = None  # URL sorgente dell'immagine di fondo (risolto sui media caricati)
     links: tuple[dict, ...] = ()  # barra alta, es. [{label: Storia Digitale UniCA, url: ...}]
+    hide_root_title: bool = True  # radice senza titolo del tema: è già nella testata (e di solito nel banner)
 
 
 @dataclass(frozen=True)
