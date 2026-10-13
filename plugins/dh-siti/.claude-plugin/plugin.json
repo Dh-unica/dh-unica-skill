@@ -1,6 +1,6 @@
 {
   "name": "dh-siti",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Ricognizione e migrazione di minisiti di progetto (WordPress/Elementor o HTML statico) nei portali DH UNICA secondo la name convention {ambito}.dh.unica.it/{progetto}/.",
   "author": {
     "name": "Centro DH UNICA",

@@ -12,6 +12,7 @@ from .extract import extract
 from .http import make_session
 from .load import load, open_state, publish, rollback
 from .menu import sync_menu
+from .navsection import sync_section_nav
 from .transform import transform_site
 from .redirects import write_redirects
 from .survey import run_survey
@@ -112,7 +113,10 @@ def cmd_menu(cfg, args) -> int:
     if not _confirmed(args, "menu"):
         return 1
     client = _client(cfg, args)
-    print(json.dumps(sync_menu(cfg, client, open_state(cfg, client)), indent=2, ensure_ascii=False))
+    state = open_state(cfg, client)
+    # navigazione completa: voci nel menu globale + barra/testata del progetto (pattern sincronizzato)
+    result = {**sync_menu(cfg, client, state), "section_nav": sync_section_nav(cfg, client, state)}
+    print(json.dumps(result, indent=2, ensure_ascii=False))
     return 0
 
 

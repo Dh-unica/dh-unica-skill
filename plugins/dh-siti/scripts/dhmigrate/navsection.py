@@ -18,6 +18,7 @@ from html import escape
 
 from . import blocks
 from .config import Config
+from .testata import header_html
 from .wp_client import WPClient
 
 log = logging.getLogger(__name__)
@@ -43,7 +44,7 @@ def navigation_content(cfg: Config, page_ids: dict[str, int]) -> str:
     return "\n".join(links)
 
 
-def pattern_content(cfg: Config, navigation_id: int) -> str:
+def pattern_content(cfg: Config, navigation_id: int, media_map: dict | None = None) -> str:
     nav_cfg = cfg.section_nav
     trail = [f'<a href="{escape(c["url"])}">{escape(c["label"])}</a>' for c in nav_cfg.breadcrumb]
     root_label = (cfg.menu.label if cfg.menu and cfg.menu.label else None) or cfg.root.title or cfg.project_slug
@@ -54,7 +55,10 @@ def pattern_content(cfg: Config, navigation_id: int) -> str:
     nav_attrs = {"ref": navigation_id, "overlayMenu": "never", "ariaLabel": f"Menu del progetto {root_label}",
                  "layout": {"type": "flex", "flexWrap": "wrap"}}
     navigation = f"<!-- wp:navigation {blocks.serialize_attrs(nav_attrs)} /-->"
-    inner = "\n\n".join([blocks.html_block(CSS), percorso, navigation])
+    parts = [blocks.html_block(CSS), percorso, navigation]
+    if nav_cfg.header is not None:  # prima della barra: lo script la nasconde prima che venga disegnata
+        parts.insert(0, blocks.html_block(header_html(cfg, media_map or {})))
+    inner = "\n\n".join(parts)
     return blocks.group(inner, "dh-progetto-nav")
 
 
@@ -75,7 +79,7 @@ def sync_section_nav(cfg: Config, client: WPClient, state) -> dict:
     else:
         own["navigation_id"] = client.create_navigation(nav_data)["id"]
         state.save()
-    block_data = {"title": f"Barra progetto: {label}", "content": pattern_content(cfg, own["navigation_id"]),
+    block_data = {"title": f"Barra progetto: {label}", "content": pattern_content(cfg, own["navigation_id"], state.media),
                   "status": "publish"}
     if own.get("block_id"):
         client.update_block(own["block_id"], block_data)
